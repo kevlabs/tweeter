@@ -1,0 +1,29 @@
+.new-tweet {
+  margin: 10px auto;
+}
+
+.new-tweet textarea {
+  width: 100%;
+  font-weight: 700;
+  background-color: transparent;
+  border: none;
+  border-bottom: 2px solid #545149;
+  resize: none;
+}
+
+.new-tweet input[type='submit'] {
+  font-family: 'Bungee', cursive;
+  font-weight: 700;
+  font-size: 0.5em;
+  color: #FFF;
+  background-color: #4056A1;
+  border: none;
+  padding: 5px;
+}
+
+.new-tweet .counter {
+  font-family: 'Bungee', cursive;
+  font-weight: 700;
+  font-size: 0.5em;
+  float: right;
+}
