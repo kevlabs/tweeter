@@ -17,9 +17,18 @@ html {
 body {
   color: #545149;
   background-color: #f4f1ec;
+  font-family: 'Source Sans Pro', sans-serif;
+  font-weight: 300;
   font-size: 24px;
+  margin-top: 120px;
 }
 
 /*
  * Additional CSS can be defined below or in other CSS files, as per instructions
  */
+
+ main {
+   width: 90%;
+   background-color: #f4f1ec;
+   margin: 0 auto;
+ }
