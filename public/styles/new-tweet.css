@@ -27,3 +27,7 @@
   font-size: 0.5em;
   float: right;
 }
+
+.overlimit {
+  color: #F00;
+}
