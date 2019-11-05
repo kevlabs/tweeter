@@ -4,31 +4,6 @@
  * Reminder: Use (and do all your DOM work in) jQuery's document ready function
  *
  */
-const tweetData = JSON.parse(`[
-  {
-    "user": {
-      "name": "Newton",
-      "avatars": "https://i.imgur.com/73hZDYK.png"
-      ,
-      "handle": "@SirIsaac"
-    },
-    "content": {
-      "text": "If I have seen further it is by standing on the shoulders of giants"
-    },
-    "created_at": 1461116232227
-  },
-  {
-    "user": {
-      "name": "Descartes",
-      "avatars": "https://i.imgur.com/nlhLi3I.png",
-      "handle": "@rd" },
-    "content": {
-      "text": "Je pense , donc je suis"
-    },
-    "created_at": 1461113959088
-  }
-]`);
-
 
 const escapeText = function(text) {
   return document.createElement('div').textContent = text;
@@ -61,7 +36,69 @@ const createTweetElement = (data) => {
 };
 
 const renderTweets = function(tweets) {
-  $('#tweets-container').append(tweets.map(tweet => createTweetElement(tweet)));
+  $('#tweets-container').prepend(tweets.map(tweet => createTweetElement(tweet)));
 };
 
-$(() => renderTweets(tweetData));
+const toggleError = function(err) {
+  console.log(err);
+  
+  $('#error-container').attr('data-error', err || null);
+};
+
+const getTweets = (function() {
+  let counter = 0;
+  return function(error, success, latestOnly = false) {
+    $.ajax({
+      method: 'GET',
+      url: '/tweets/',
+      dataType: 'json',
+      error: error || (() => toggleError('Error while fetching tweets!')),
+      success: (data) => {
+        // load only latest tweets if flag set to true
+        data = latestOnly && data.slice(counter) || data;
+        success(data);
+        counter += data.length;
+      }
+    });
+  };
+})();
+
+const loadTweets = function(latestOnly = false) {
+  getTweets(null, renderTweets, latestOnly);
+};
+
+
+$(function() {
+
+  //register handlers for form post
+  $('form').on('submit', (event) => {
+    event.preventDefault();
+    const $form = $(event.target);
+
+    //get form data
+    const formData = $(event.target).children('textarea').val();
+
+    // data validation
+    if (!formData || formData.length > 140) {
+      toggleError('Tweets must be 1 to 140 characters');
+      return;
+    }
+
+    $.ajax({
+      method: 'POST',
+      url: '/tweets/',
+      data: $form.serialize(),
+      error: () => toggleError('Error while posting your tweet!'),
+      statusCode: {
+        400: () => toggleError('Tweets cannot be blank!'),
+        500: () => toggleError('Server Error'),
+        201: () => loadTweets(true)
+      }
+    });
+  
+  });
+
+  //get all tweets on load
+  loadTweets();
+
+});

@@ -27,8 +27,30 @@ body {
  * Additional CSS can be defined below or in other CSS files, as per instructions
  */
 
- main {
-   width: 90%;
-   background-color: #f4f1ec;
-   margin: 0 auto;
- }
+#error-container {
+  display: none;
+  border: #F00;
+  width: 90%;
+  margin: 20px auto;
+  padding: 5px 10px;
+  font-size: 0.8em;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #F00;
+  border: 2px solid #F00;
+  border-radius: 8px;
+}
+
+#error-container[data-error] {
+  display: block;
+}
+
+#error-container[data-error]::after {
+  content: attr(data-error);
+}
+
+main {
+  width: 90%;
+  background-color: #f4f1ec;
+  margin: 0 auto;
+}
