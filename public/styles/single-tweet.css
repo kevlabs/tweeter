@@ -1,0 +1,74 @@
+.single-tweet {
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 3px solid #545149;
+}
+
+.single-tweet:hover {
+  box-shadow: 5px 5px #D9B9B2;
+  opacity: 1;
+}
+
+.single-tweet > * {
+  padding: 4px 10px;
+  opacity: 0.7;
+}
+
+.single-tweet:hover > * {
+  opacity: 1;
+}
+
+.single-tweet header, .single-tweet footer {
+  display: flex;
+  align-items: center;
+}
+
+.single-tweet header {
+  font-size: 0.8em;
+}
+
+.single-tweet header img {
+  max-width: 50px;
+}
+
+.single-tweet header > div:nth-child(2), .single-tweet footer > div:first-child {
+  flex-grow: 1;
+}
+
+.single-tweet header > div:last-child, .single-tweet footer > div:last-child  {
+  text-align: right;
+}
+
+.single-tweet header > div:last-child {
+  display: none;
+  color: #D9B9B2;
+}
+
+.single-tweet:hover header > div:last-child {
+  display: block;
+}
+
+.single-tweet footer {
+  font-size: 0.5em;
+}
+
+.single-tweet footer ul {
+  list-style: none;
+  color: #4056A1;
+  margin: 0;
+}
+
+.single-tweet footer ul li {
+  display: inline-block;
+  padding: 2px 5px;
+}
+
+.single-tweet footer ul li:hover {
+  opacity: 0.8;
+}
+
+.single-tweet > div {
+  font-size: 1em;
+  border-bottom: 3px solid #545149;
+  padding-bottom: 10px;
+}

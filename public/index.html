@@ -7,6 +7,7 @@
     <!-- External CSS -->
     <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
     <link href="https://fonts.googleapis.com/css?family=Bungee|Source+Sans+Pro:300,300i,700,700i&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css?ver=5.8.2">
 
 
     <!-- App CSS -->
@@ -14,6 +15,7 @@
     <link rel="stylesheet" href="/styles/nav.css" type="text/css" />
     <link rel="stylesheet" href="/styles/header.css" type="text/css" />
     <link rel="stylesheet" href="/styles/new-tweet.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/single-tweet.css" type="text/css" />
 
     <!-- External JS -->
     <script type="text/javascript" src="/vendor/jquery-2.2.3.min.js"></script>
@@ -25,10 +27,10 @@
 
   <body>
     <!-- Top nav bar (fixed) -->
-    <nav>
+    <nav class="primary-nav">
       <span>tweeter</span>
     </nav>
-    <header>
+    <header class="site-header">
       <div>
           <img src="/images/profile-hex.png"> 
       </div>
@@ -46,6 +48,26 @@
           <input type="submit" value="Tweet">
           <span class="counter">140</span>
         </form>
+      </section>
+      <section id="tweets">
+        <article class="single-tweet">
+          <header>
+            <div><img src="/images/profile-hex.png"></div>
+            <div>Newton</div>
+            <div>@Sirlsaac</div>
+          </header>
+          <div>If I have seen further it is by standing on the shoulders of giants</div>
+          <footer>
+            <div>10 days ago</div>
+            <ul>
+              <li class="fa fa-flag"></li>
+              <li class="fa fa-retweet"></li>
+              <li class="fa fa-heart"></li>
+            </ul>
+          </footer>
+
+        </article>
+
       </section>
 
     </main>
