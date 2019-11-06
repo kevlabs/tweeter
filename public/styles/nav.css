@@ -18,10 +18,15 @@ font-family: 'Bungee', cursive;
 }
 
 button {
+  display: none;
   background-color: transparent;
   border: none;
   color: inherit;
   padding: 0;
+}
+
+button.show {
+  display: inline;
 }
 
 button::before {
@@ -33,7 +38,7 @@ button::before {
   transition: transform 0.4s ease-in-out;
 }
 
-button.toggle-form::before {
+button.toggled::before {
   transform: rotate(180deg);
 }
 

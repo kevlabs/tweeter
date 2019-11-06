@@ -69,17 +69,8 @@ const loadTweets = function(latestOnly = false) {
   getTweets(null, renderTweets, latestOnly);
 };
 
-const hasScrolledY = (function() {
-  let lastScrollY = window.scrollY;
-  return () => {
-    const output = window.scrollY > lastScrollY;
-    lastScrollY = window.scrollY;
-    return output;
-  };
-})();
 
-
-$(function() {
+$(() => {
 
   //register handler for form post
   $('form').on('submit', (event) => {
@@ -116,20 +107,7 @@ $(function() {
   
   });
 
-  //register form toggle handler
-  $('nav button').on('click', function(event) {
-    event.preventDefault();
-    $(this).toggleClass('toggle-form');
-    const $formWrapper = $('.new-tweet');
-    $formWrapper.slideToggle(400, () => $formWrapper.find('textarea')[$(this).hasClass('toggle-form') && 'focus'  || 'blur']());
-  });
-
   //get all tweets on load
   loadTweets();
-
-  //scroll
-  setTimeout(() => {
-    window.scrollY
-  }, 500);
 
 });
