@@ -17,7 +17,21 @@ nav span:first-child {
 font-family: 'Bungee', cursive;
 }
 
-button {
+nav ul {
+  list-style: none;
+  margin: 0;
+}
+
+nav li {
+  display: inline-block;
+  margin-right: 20px;
+}
+
+nav li:last-of-type {
+  margin-right: 0;
+}
+
+nav button {
   display: none;
   background-color: transparent;
   border: none;
@@ -25,11 +39,11 @@ button {
   padding: 0;
 }
 
-button.show {
+nav button.show {
   display: inline;
 }
 
-button::before {
+nav button::before {
   display: inline-block;
   font-family: 'Font Awesome 5 Free';
   font-weight: 900;
@@ -38,10 +52,10 @@ button::before {
   transition: transform 0.4s ease-in-out;
 }
 
-button.toggled::before {
+nav button.toggled::before {
   transform: rotate(180deg);
 }
 
-button:hover {
+nav button:hover {
   opacity: 0.8;
 }

@@ -5,6 +5,10 @@
  *
  */
 
+class PublicError extends Error {
+  
+};
+
 const escapeText = function(text) {
   const div = document.createElement('div');
   div.appendChild(document.createTextNode(text));
@@ -17,17 +21,19 @@ const daysAgo = function(date) {
 };
 
 const createTweetElement = (data) => {
+  const name = escapeText(data.user.name);
+  const date = new Date(Number(data.created_at));
   return $('<article>')
     .addClass('single-tweet')
     .html(
       `<header>
-        <div><img src="${data.user.avatars}"></div>
-        <div>${escapeText(data.user.name)}</div>
+        <div><img src="${data.user.avatars}" alt="${name}" title="${name}"></div>
+        <div>${name}</div>
         <div>${data.user.handle}</div>
       </header>
       <div>${escapeText(data.content.text)}</div>
       <footer>
-        <div>${daysAgo(Number(data.created_at))}</div>
+        <div><time datetime="${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDay()).padStart(2, '0')}">${daysAgo(Number(data.created_at))}</time></div>
         <ul>
           <li class="fa fa-flag"></li>
           <li class="fa fa-retweet"></li>
@@ -41,72 +47,98 @@ const renderTweets = function(tweets) {
   $('#tweets-container').prepend(tweets.map(tweet => createTweetElement(tweet)));
 };
 
-const toggleError = function(err) {
+const displayError = function(err) {
   const $container = $('#error-container').attr('data-error', err || null);
   err && $container.slideDown(500, () => {
-    setTimeout(() => $container.slideUp(500, toggleError), 2000);
+    setTimeout(() => $container.slideUp(500, displayError), 2000);
   });
 };
 
+// async fn
+// error and success are callbacks
 const getTweets = (function() {
   let counter = 0;
-  return function(error, success, latestOnly = false) {
-    $.ajax({
-      method: 'GET',
-      url: '/tweets/',
-      dataType: 'json',
-      error: error || (() => toggleError('Error while fetching tweets!')),
-      success: (data) => {
-        // load only latest tweets if flag set to true
-        data = latestOnly && data.slice(counter) || data;
-        success(data.reverse());
-        counter += data.length;
+  return async function(error, success, latestOnly = false) {
+    try {
+      let data = await $.ajax({
+        method: 'GET',
+        url: '/tweets/',
+        dataType: 'json'
+      });
+
+      // load only latest tweets if flag set to true
+      data = latestOnly && data.slice(counter) || data;
+      counter += data.length;
+      data.reverse();
+      success(data);
+
+    } catch (err) {
+      if (error) {
+        error(err);
+      } else if (err instanceof PublicError) {
+        displayError('Error while fetching tweets!');
       }
-    });
+    }
   };
 })();
 
+// async fn
 const loadTweets = function(latestOnly = false) {
   getTweets(null, renderTweets, latestOnly);
+};
+
+// returns serialized form data if input valid, throws an error otherwise
+// logs error to error container
+const getFormData = function() {
+  const $form = $('form');
+
+  //get form data
+  const formData = $form.children('textarea').val();
+
+  if (!formData) {
+    throw new PublicError('Your tweet cannot be empty');
+  } else if (formData.length > 140) {
+    throw new PublicError('Your tweet cannot exceed 140 characters in length');
+  }
+
+  return $form.serialize();
+};
+
+const resetForm = () => $('form textarea').val('');
+
+//async fn
+const postTweet = async function (event) {
+  try {
+    event.preventDefault();
+
+    // getFormData will throw an error if data validation fails
+    const formData = getFormData();
+
+    // post tweets
+    await $.ajax({
+      method: 'POST',
+      url: '/tweets/',
+      data: formData
+    });
+
+    loadTweets(true);
+    resetForm();
+
+  } catch (err) {
+    //only display public errors otherwise show a generic message
+    if (err instanceof PublicError) {
+      displayError(err.message);
+    } else {
+      displayError('Error while posting your tweet!');
+    }
+  }
 };
 
 
 $(() => {
 
   //register handler for form post
-  $('form').on('submit', (event) => {
-    event.preventDefault();
-    const $form = $(event.target);
-
-    //get form data
-    const $textarea = $(event.target).children('textarea');
-    const formData = $textarea.val();
-
-    // data validation
-    if (!formData) {
-      toggleError('Your tweet cannot be empty');
-    } else if (formData.length > 140) {
-      toggleError('Your tweet cannot exceed 140 characters in length');
-    } else {
-
-      //post tweets
-      $.ajax({
-        method: 'POST',
-        url: '/tweets/',
-        data: $form.serialize(),
-        error: () => toggleError('Error while posting your tweet!'),
-        statusCode: {
-          400: () => toggleError('Tweets cannot be blank!'),
-          500: () => toggleError('Server Error'),
-          201: () => {
-            loadTweets(true);
-            $textarea.val('');
-          }
-        }
-      });
-    }
-  
-  });
+  $('form').on('submit', postTweet);
 
   //get all tweets on load
   loadTweets();
