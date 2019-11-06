@@ -1,5 +1,6 @@
 .new-tweet {
   margin: 10px auto 30px;
+  display: none;
 }
 
 .new-tweet textarea {
@@ -19,6 +20,11 @@
   background-color: #4056A1;
   border: none;
   padding: 5px;
+  transition: opacity 0.4s ease-in;
+}
+
+.new-tweet input[type='submit']:hover {
+  opacity: 0.8;
 }
 
 .new-tweet .counter {
