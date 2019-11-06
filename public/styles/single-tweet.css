@@ -72,4 +72,5 @@
   font-size: 1em;
   border-bottom: 3px solid #545149;
   padding-bottom: 10px;
+  overflow: hidden;
 }

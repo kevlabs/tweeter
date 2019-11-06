@@ -90,7 +90,7 @@ const loadTweets = function(latestOnly = false) {
 // returns serialized form data if input valid, throws an error otherwise
 // logs error to error container
 const getFormData = function() {
-  const $form = $('form');
+  const $form = $('.new-tweet form');
 
   //get form data
   const formData = $form.children('textarea').val();
@@ -104,7 +104,10 @@ const getFormData = function() {
   return $form.serialize();
 };
 
-const resetForm = () => $('form textarea').val('');
+const resetForm = () => {
+  $('form textarea').val('');
+  $('form .counter').text(140);
+};
 
 //async fn
 const postTweet = async function (event) {
@@ -138,7 +141,7 @@ const postTweet = async function (event) {
 $(() => {
 
   //register handler for form post
-  $('form').on('submit', postTweet);
+  $('.new-tweet form').on('submit', postTweet);
 
   //get all tweets on load
   loadTweets();

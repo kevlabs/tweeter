@@ -6,10 +6,16 @@
 .new-tweet textarea {
   width: 100%;
   font-weight: 700;
+  color: #545149;
   background-color: transparent;
   border: none;
   border-bottom: 2px solid #545149;
   resize: none;
+  outline: none;
+}
+
+.new-tweet textarea:focus {
+  border-color: #4056A1;
 }
 
 .new-tweet input[type='submit'] {
