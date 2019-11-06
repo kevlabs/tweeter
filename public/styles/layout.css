@@ -72,8 +72,12 @@ body {
   border-radius: 8px;
 }
 
-#error-container[data-error] {
-  display: block;
+#error-container[data-error]::before {
+  font-family: 'Font Awesome 5 Free';
+  font-weight: 900;
+  font-size: 0.8em;
+  content: '\f071';
+  margin-right: 15px;
 }
 
 #error-container[data-error]::after {

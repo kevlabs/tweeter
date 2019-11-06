@@ -43,8 +43,9 @@ const renderTweets = function(tweets) {
 
 const toggleError = function(err) {
   const $container = $('#error-container').attr('data-error', err || null);
-  err && $container.toggle(true);
-  setTimeout(() => $container.slideUp(1000, toggleError), 2000);
+  err && $container.slideDown(500, () => {
+    setTimeout(() => $container.slideUp(500, toggleError), 2000);
+  });
 };
 
 const getTweets = (function() {
