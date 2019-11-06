@@ -27,6 +27,7 @@
   border: none;
   padding: 5px;
   transition: opacity 0.4s ease-in;
+  outline: none;
 }
 
 .new-tweet input[type='submit']:hover {

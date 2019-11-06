@@ -15,6 +15,10 @@ const escapeText = function(text) {
   return div.innerHTML;
 };
 
+const addLineBreaks = function(text) {
+  return text.replace(/\r\n|\n/, '<br />');
+};
+
 const daysAgo = function(date) {
   const days = Math.ceil((Date.now() - date) / 86400000);
   return days + ' day' + (days > 1 && 's' || '') + ' ago';
@@ -31,7 +35,7 @@ const createTweetElement = (data) => {
         <div>${name}</div>
         <div>${data.user.handle}</div>
       </header>
-      <div>${escapeText(data.content.text)}</div>
+      <div>${addLineBreaks(escapeText(data.content.text))}</div>
       <footer>
         <div><time datetime="${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDay()).padStart(2, '0')}">${daysAgo(Number(data.created_at))}</time></div>
         <ul>
@@ -57,7 +61,7 @@ const displayError = function(err) {
 // async fn
 // error and success are callbacks
 const getTweets = (function() {
-  let counter = 0;
+  let maxTimestamp = 0;
   return async function(error, success, latestOnly = false) {
     try {
       let data = await $.ajax({
@@ -67,9 +71,16 @@ const getTweets = (function() {
       });
 
       // load only latest tweets if flag set to true
-      data = latestOnly && data.slice(counter) || data;
-      counter += data.length;
-      data.reverse();
+      ({data, maxTimestamp} = data.reduce((output, tweet) => {
+        // push tweet if latest && date > max or all otherwise
+        (latestOnly ? tweet.created_at > maxTimestamp : true) && output.data.push(tweet);
+        // keep track of new max
+        tweet.created_at > output.maxTimestamp && (output.maxTimestamp = tweet.created_at);
+        return output;
+      }, { data: [], maxTimestamp }));
+
+      // sort data by timestamp
+      data.sort(({created_at: a}, {created_at: b}) => b - a);
       success(data);
 
     } catch (err) {

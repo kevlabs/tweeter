@@ -11,7 +11,7 @@
   color: #FFF;
 }
 
-@media screen and (min-width: 800px) {
+@media (min-width: 800px) {
   .site-header {
     width: 30vw;
     max-width: 250px;
@@ -34,7 +34,7 @@
   max-height: 200px;
 }
 
-@media screen and (min-width: 800px) {
+@media (min-width: 800px) {
   .site-header img {
     max-height: 100%;
   }
@@ -51,7 +51,7 @@
   font-weight: 700;
 }
 
-@media screen and (min-width: 800px) {
+@media (min-width: 800px) {
   .site-header h2 {
     font-size: 1em;
     margin: 20px 0;

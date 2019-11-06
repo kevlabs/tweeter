@@ -11,32 +11,19 @@ const hasScrolledY = (function() {
 
 //using setInterval instead of attaching an event handler to 'scroll' as scroll fires at a high rate
 const toggleScrollControl = function(destination = -1) {
-  let scrollInterval;
-  if (destination < 0) {
-    scrollInterval = setInterval(() => {
-      if (hasScrolledY()) {
-        clearInterval(scrollInterval);
-        $('#scroll-control').toggleClass('show');
-        $('nav button').toggleClass('show');
-        $('#scroll-control').one('click', () => {
-          toggleForm(null, true);
-          $('html').animate({ scrollTop: 0 }, 400);
-        });
-        toggleScrollControl(0);
+  let scrollInterval = setInterval(() => {
+    if (hasScrolledY(destination)) {
+      clearInterval(scrollInterval);
+      $('#scroll-control').toggleClass('show');
+      $('nav').toggleClass('show');
 
-      }
-    }, 500);
-  } else {
-    scrollInterval = setInterval(() => {
-      if (hasScrolledY(destination)) {
-        clearInterval(scrollInterval);
-        $('#scroll-control').toggleClass('show');
-        $('nav button').toggleClass('show');
-        toggleScrollControl();
-
-      }
-    }, 500);
-  }
+      destination < 0 && $('#scroll-control').one('click', () => {
+        toggleForm(null, true);
+        $('html').animate({ scrollTop: 0 }, 400);
+      });
+      toggleScrollControl(destination < 0 ? 0 : -1);
+    }
+  }, 400);
 };
 
 const toggleForm = (function() {
