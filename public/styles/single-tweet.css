@@ -33,6 +33,7 @@
 
 .single-tweet header > div:nth-child(2), .single-tweet footer > div:first-child {
   flex-grow: 1;
+  padding: 0 15px;
 }
 
 .single-tweet header > div:last-child, .single-tweet footer > div:last-child  {

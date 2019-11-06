@@ -84,7 +84,7 @@ $(() => {
 
     // data validation
     if (!formData) {
-      toggleError('You tweet cannot be empty');
+      toggleError('Your tweet cannot be empty');
     } else if (formData.length > 140) {
       toggleError('Your tweet cannot exceed 140 characters in length');
     } else {
