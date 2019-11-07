@@ -1,4 +1,4 @@
-//returns function which returns true is user has scrolled vertically since function was last called or if a destination is passed then when the destination is reached
+// returns true is user has scrolled vertically since function was last called or if a destination is passed then when the destination is reached
 const hasScrolledY = (function() {
   let lastScrollY = 0;
   return (destination = -1) => {
@@ -26,6 +26,8 @@ const toggleScrollControl = function(destination = -1) {
   }, 400);
 };
 
+
+// toggles form display - animated with transition on CSS end
 const toggleForm = (function() {
   let toggled = false;
   return function(event, show) {
@@ -38,6 +40,7 @@ const toggleForm = (function() {
     setTimeout(() => $formWrapper.find('textarea')[toggled && 'focus'  || 'blur'](), 500);
   };
 })();
+
 
 $(() => {
   //register form toggle handler

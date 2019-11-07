@@ -23,7 +23,7 @@ nav.show {
   }
 }
 nav span:first-child {
-  font-family: "'Bungee', cursive";
+  font-family: "Bungee", cursive;
 }
 nav span:first-child::before {
   font-family: "Font Awesome 5 Free";
