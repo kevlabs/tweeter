@@ -34,7 +34,8 @@ const toggleForm = (function() {
     toggled = !toggled;
     $('nav button').toggleClass('toggled');
     const $formWrapper = $('.new-tweet');
-    $formWrapper.slideToggle(400, () => $formWrapper.find('textarea')[toggled && 'focus'  || 'blur']());
+    $formWrapper.toggleClass('show');
+    setTimeout(() => $formWrapper.find('textarea')[toggled && 'focus'  || 'blur'](), 500);
   };
 })();
 

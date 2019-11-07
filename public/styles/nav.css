@@ -1,4 +1,4 @@
-
+@charset "UTF-8";
 nav {
   position: fixed;
   z-index: 9999;
@@ -12,52 +12,39 @@ nav {
   background-color: #4056A1;
   color: #FFF;
   padding: 1.5em;
+  transition: background-color 0.2s linear;
 }
-
 nav.show {
   background-color: transparent;
 }
-
 @media (min-width: 800px) {
   nav.show {
     background-color: #4056A1;
   }
 }
-
 nav span:first-child {
-  font-family: 'Bungee', cursive;
+  font-family: "'Bungee', cursive";
 }
-
 nav span:first-child::before {
-  display: inline-block;
-  font-family: 'Font Awesome 5 Free';
-  font-size: 1.2em;
+  font-family: "Font Awesome 5 Free";
   content: '\f4ba';
   font-weight: 900;
+  display: inline-block;
+  font-size: 1.2em;
   margin-right: 10px;
   animation: bird 1s ease-in-out infinite;
 }
-
-@keyframes bird {
-	0% { transform: rotate(-2deg); }
-	50% { transform: rotate(8deg); }
-	100% { transform: rotate(-2deg); }
-}
-
 nav ul {
   list-style: none;
   margin: 0;
 }
-
 nav li {
   display: inline-block;
   margin-right: 20px;
 }
-
 nav li:last-of-type {
   margin-right: 0;
 }
-
 nav button {
   position: relative;
   display: none;
@@ -68,35 +55,51 @@ nav button {
   outline: none;
   cursor: pointer;
 }
-
-nav.show button {
-  display: inline;
-}
-
 nav button::before {
   position: absolute;
   top: 100%;
   left: 50%;
   transform: translate(-50%, 0);
   display: block;
-  font-family: 'Font Awesome 5 Free';
+  font-family: "Font Awesome 5 Free";
   font-size: 0.8em;
   font-weight: 900;
-  content: '\f078';
+  content: "";
   transition: transform 0.4s ease-in-out;
   animation: jump 1.5s ease-in-out infinite;
 }
-
 nav button.toggled::before {
   transform: rotate(180deg);
 }
-
 nav button:hover {
   opacity: 0.8;
 }
-
-@keyframes jump {
-	0% { margin-top: -2px; }
-	50% { margin-top: 2px; color: #F00; }
-	100% { margin-top: -2px; }
+nav.show button {
+  display: inline;
 }
+
+@keyframes bird {
+  0% {
+    transform: rotate(-2deg);
+  }
+  50% {
+    transform: rotate(8deg);
+  }
+  100% {
+    transform: rotate(-2deg);
+  }
+}
+@keyframes jump {
+  0% {
+    margin-top: -2px;
+  }
+  50% {
+    margin-top: 2px;
+    color: #F00;
+  }
+  100% {
+    margin-top: -2px;
+  }
+}
+
+/*# sourceMappingURL=nav.css.map */

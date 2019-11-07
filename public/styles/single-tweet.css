@@ -31,17 +31,17 @@
   max-width: 50px;
 }
 
-.single-tweet header > div:nth-child(2), .single-tweet footer > div:first-child {
+.single-tweet header > div:nth-child(2), .single-tweet footer > div {
   flex-grow: 1;
   padding: 0 15px;
 }
 
-.single-tweet header > div:last-child, .single-tweet footer > div:last-child  {
+.single-tweet header > div:last-child {
+  display: none;
   text-align: right;
 }
 
 .single-tweet header > div:last-child {
-  display: none;
   color: #D9B9B2;
 }
 
@@ -51,18 +51,29 @@
 
 .single-tweet footer {
   font-size: 0.5em;
+  padding: 2px 5px;
 }
 
 .single-tweet footer ul {
+  display: none;
   list-style: none;
   color: #4056A1;
   margin: 0;
+  padding: 0;
+}
+
+.single-tweet:hover footer ul {
+  display: block;
 }
 
 .single-tweet footer ul li {
   display: inline-block;
-  padding: 2px 5px;
+  padding: 0 5px;
   cursor: pointer;
+}
+
+.single-tweet footer ul li:last-child {
+  padding-right: 0;
 }
 
 .single-tweet footer ul li:hover {

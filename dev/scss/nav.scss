@@ -1,0 +1,112 @@
+$bg-col: #4056A1;
+$font-fam: '\'Bungee\', cursive';
+$breakpoint: 800px;
+
+@function unicode($code) {
+  @return unquote('\'') + unquote(str-insert($code, '\\', 1)) + unquote('\'');
+}
+
+@mixin fa-icon($code) {
+  font-family: 'Font Awesome 5 Free';
+  content: unicode($code);
+  font-weight: 900;
+}
+
+nav {
+  position: fixed;
+  z-index: 9999;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 80px;
+  background-color: $bg-col;
+  color: #FFF;
+  padding: 1.5em;
+  transition: background-color 0.2s linear;
+
+  &.show {
+    background-color: transparent;
+
+    @media (min-width: $breakpoint) {
+      background-color: $bg-col;
+    }
+  }
+
+  span:first-child {
+    font-family: $font-fam;
+
+    &::before {
+      @include fa-icon('f4ba');
+      display: inline-block;
+      font-size: 1.2em;
+      margin-right: 10px;
+      animation: bird 1s ease-in-out infinite;
+    }
+  }
+
+  ul {
+    list-style: none;
+    margin: 0;
+  }
+  
+  li {
+    display: inline-block;
+    margin-right: 20px;
+  
+    &:last-of-type {
+      margin-right: 0;
+    }
+  }
+  
+  button {
+    position: relative;
+    display: none;
+    background-color: transparent;
+    border: none;
+    color: inherit;
+    padding: 0;
+    outline: none;
+    cursor: pointer;
+
+    &::before {
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translate(-50%, 0);
+      display: block;
+      font-family: 'Font Awesome 5 Free';
+      font-size: 0.8em;
+      font-weight: 900;
+      content: '\f078';
+      transition: transform 0.4s ease-in-out;
+      animation: jump 1.5s ease-in-out infinite;
+    }
+
+    &.toggled::before {
+      transform: rotate(180deg);
+    }
+
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+  
+  &.show button {
+    display: inline;
+  }
+}
+
+@keyframes bird {
+	0% { transform: rotate(-2deg); }
+	50% { transform: rotate(8deg); }
+	100% { transform: rotate(-2deg); }
+}
+
+@keyframes jump {
+	0% { margin-top: -2px; }
+	50% { margin-top: 2px; color: #F00; }
+	100% { margin-top: -2px; }
+}

@@ -1,6 +1,18 @@
-.new-tweet {
+/* .new-tweet {
   margin: 10px auto 30px;
   display: none;
+} */
+
+.new-tweet {
+  margin: 10px auto 30px;
+  /* display: none; */
+  max-height: 0;
+  transition: max-height 0.5s ease-out;
+  overflow: hidden;
+}
+
+.new-tweet.show {
+  max-height: 250px;
 }
 
 .new-tweet textarea {
