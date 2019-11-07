@@ -1,8 +1,12 @@
 # Tweeter Project
 
-Tweeter is a simple, single-page Twitter clone.
+Tweeter is a simple, single-page responsive Twitter clone.
 
-This repository is the starter code for the project: Students will fork and clone this repository, then build upon it to practice their HTML, CSS, JS, jQuery and AJAX front-end skills, and their Node, Express and MongoDB back-end skills.
+## Final Product
+
+!["Screenshot of the new tweet form - small devices"](https://github.com/kevlabs/tweeter/blob/master/docs/small-width-form.png)
+!["Screenshot of the feed - small devices"](https://github.com/kevlabs/tweeter/blob/master/docs/small-width-feed.png)
+!["Screenshot of the feed - large devices"](https://github.com/kevlabs/tweeter/blob/master/docs/full-width-feed.png)
 
 ## Getting Started
 
