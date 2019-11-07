@@ -6,7 +6,7 @@ Tweeter is a simple, single-page responsive Twitter clone.
 
 !["Screenshot of the new tweet form - small devices"](https://github.com/kevlabs/tweeter/blob/master/docs/small-width-form.png)
 !["Screenshot of the feed - small devices"](https://github.com/kevlabs/tweeter/blob/master/docs/small-width-feed.png)
-!["Screenshot of the feed - large devices"](https://github.com/kevlabs/tweeter/blob/master/docs/full-width-feed.png)
+!["Screenshot of the input form - large devices"](https://github.com/kevlabs/tweeter/blob/master/docs/full-width-form.png)
 
 ## Getting Started
 
