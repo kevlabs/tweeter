@@ -2,6 +2,7 @@
   padding: 10px;
   margin: 20px 0;
   border: 3px solid #545149;
+  border-radius: 8px;
 }
 
 .single-tweet:hover {
