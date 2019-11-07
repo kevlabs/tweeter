@@ -62,6 +62,7 @@
 .single-tweet footer ul li {
   display: inline-block;
   padding: 2px 5px;
+  cursor: pointer;
 }
 
 .single-tweet footer ul li:hover {

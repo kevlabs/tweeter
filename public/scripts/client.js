@@ -5,9 +5,7 @@
  *
  */
 
-class PublicError extends Error {
-  
-};
+class PublicError extends Error {}
 
 const escapeText = function(text) {
   const div = document.createElement('div');
@@ -54,7 +52,7 @@ const renderTweets = function(tweets) {
 const displayError = function(err) {
   const $container = $('#error-container').attr('data-error', err || null);
   err && $container.slideDown(500, () => {
-    setTimeout(() => $container.slideUp(500, displayError), 2000);
+    setTimeout(() => $container.slideUp(500, displayError), 4000);
   });
 };
 
@@ -121,7 +119,7 @@ const resetForm = () => {
 };
 
 //async fn
-const postTweet = async function (event) {
+const postTweet = async function(event) {
   try {
     event.preventDefault();
 

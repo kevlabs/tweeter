@@ -66,6 +66,7 @@ nav button {
   color: inherit;
   padding: 0;
   outline: none;
+  cursor: pointer;
 }
 
 nav.show button {
